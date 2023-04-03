@@ -1,7 +1,7 @@
 name: Build On Push
 
 on:
-  pull_request:
+  push:
     branches: [ '*' ]
 
 jobs:
