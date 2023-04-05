@@ -23,6 +23,7 @@ services:
     
   oauth-service:
     container_name: oauth-service
+    build: .
     image: leoberlatto/oauth-service:latest
     ports:
       - 8080:8080
