@@ -1,4 +1,9 @@
-security:
-  oauth:
-    client_secret: 5t92L92vBLv3EEs5hSOfNZbgeurC1U5x
-    keycloak_url: http://localhost:8090
+spring:
+  application:
+    name: oauth-service
+
+management:
+  endpoints:
+    web:
+     exposure:
+       include: [health, info, env, metrics]
