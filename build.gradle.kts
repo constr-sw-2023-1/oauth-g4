@@ -22,7 +22,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	runtimeOnly("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.keycloak:keycloak-admin-client:21.0.2")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+    runtimeOnly("com.h2database:h2")
+	testImplementation("io.mockk:mockk:1.13.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
