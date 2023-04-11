@@ -11,7 +11,7 @@ spring:
         admin-password: ${KEYCLOAK_ADMIN_PASSWORD:admin}
         realm:
           name: ${KEYCLOAK_REALM:construcao-sw}
-          url: ${KEYCLOAK_REALM_URL:http://localhost:8090/construcao-sw/}
+          url: ${KEYCLOAK_REALM_URL:http://localhost:8090/realms/construcao-sw/}
         auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8090/auth}
 
 management:
