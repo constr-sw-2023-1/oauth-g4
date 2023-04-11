@@ -1,5 +1,5 @@
 build:
-	docker build -t leoberlatto/ouath-service .
+	docker build -t leoberlatto/oauth-service .
 
 up:
 	docker compose up -d

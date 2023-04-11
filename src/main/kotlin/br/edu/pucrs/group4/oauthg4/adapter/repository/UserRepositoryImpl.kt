@@ -2,6 +2,7 @@ package br.edu.pucrs.group4.oauthg4.adapter.repository
 
 import  br.edu.pucrs.group4.oauthg4.adapter.keycloak.KeycloakUserRepository
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
+import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import br.edu.pucrs.group4.oauthg4.domain.repository.UserRepository
 import org.springframework.stereotype.Repository
@@ -23,18 +24,10 @@ class UserRepositoryImpl(
         return Optional.empty()
     }
 
-    override fun save(user: User): User {
-        keycloakUserRepository.save(
-            UserRepresentation(
-                user.id,
-                user.firstName,
-                user.lastName,
-                user.username,
-                user.email
-            )
-        )
+    override fun save(user: UserRepresentation, token: String): UserDTO {
+        val saveResponse = keycloakUserRepository.save(user, token)
 
-        return user
+        return UserDTO(user.id.toString(),user.username,user.firstName,user.lastName,true)
     }
 
     override fun update(user: User): User {
