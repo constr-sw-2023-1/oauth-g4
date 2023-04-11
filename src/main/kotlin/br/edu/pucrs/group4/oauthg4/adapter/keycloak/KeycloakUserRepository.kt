@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
-@FeignClient(name = "keycloak", url = "\${spring.security.oauth2.keycloak.realm.url}")
+@FeignClient(name = "keycloak", url = "\${spring.security.oauth2.keycloak.realm.url}/admin/realms/construcao-sw")
 interface KeycloakUserRepository {
 
     @GetMapping("/users")
@@ -16,7 +16,7 @@ interface KeycloakUserRepository {
     fun findById(@PathVariable id: UUID): Optional<User>
 
     @PostMapping("/users")
-    fun save(user: UserRepresentation)
+    fun save(@RequestBody user: UserRepresentation, @RequestHeader("Authorization") token: String)
 
     @PutMapping("/users/{id}")
     fun update(@PathVariable id: Long, user: User): User

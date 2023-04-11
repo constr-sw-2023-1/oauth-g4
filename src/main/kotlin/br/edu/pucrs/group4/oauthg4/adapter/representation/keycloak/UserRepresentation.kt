@@ -8,4 +8,8 @@ class UserRepresentation(
     val lastName: String,
     val username: String,
     val email: String,
+    val enabled: Boolean = true,
+    val credentials: List<Map<String, Any>> = emptyList(),
+    val requiredActions: List<String> = emptyList()
+
 )

@@ -14,10 +14,7 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http.cors().and().csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/login").permitAll()
-            .and()
-            .authorizeHttpRequests()
-            .anyRequest().authenticated()
+            .requestMatchers("/**").permitAll()
             .and()
             .build()
     }
