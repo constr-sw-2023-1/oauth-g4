@@ -1,26 +1,22 @@
 package br.edu.pucrs.group4.oauthg4.adapter.keycloak
 
+import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import org.springframework.cloud.openfeign.FeignClient
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
-@FeignClient(name = "keycloak", url = "\${keycloak.realm.url}")
+@FeignClient(name = "keycloak", url = "\${spring.security.oauth2.keycloak.realm.url}")
 interface KeycloakUserRepository {
 
     @GetMapping("/users")
     fun findAll(): List<User>
 
     @GetMapping("/users/{id}")
-    fun findById(id: Long): Optional<User>
+    fun findById(@PathVariable id: UUID): Optional<User>
 
     @PostMapping("/users")
-    fun save(user: User): User
+    fun save(user: UserRepresentation)
 
     @PutMapping("/users/{id}")
     fun update(@PathVariable id: Long, user: User): User

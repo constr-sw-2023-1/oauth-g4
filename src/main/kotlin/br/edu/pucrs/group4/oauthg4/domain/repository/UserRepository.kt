@@ -7,7 +7,7 @@ interface UserRepository {
 
     fun findAll(): List<User>
 
-    fun findById(id: Long): Optional<User>
+    fun findById(id: UUID): Optional<User>
 
     fun findByEmail(email: String): Optional<User>
 
