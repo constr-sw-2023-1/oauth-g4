@@ -22,8 +22,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.keycloak:keycloak-admin-client:21.0.2")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")

@@ -1,7 +1,10 @@
 package br.edu.pucrs.group4.oauthg4.domain.service
 
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
+import br.edu.pucrs.group4.oauthg4.domain.exception.BadRequestException
+import br.edu.pucrs.group4.oauthg4.domain.exception.NotFoundException
 import br.edu.pucrs.group4.oauthg4.domain.repository.UserRepository
+import java.util.UUID
 
 
 class UserService(
@@ -12,13 +15,21 @@ class UserService(
         return userRepository.findAll()
     }
 
-    fun findById(id: Long): User = userRepository
+    fun findById(id: UUID): User = userRepository
         .findById(id)
-        .orElseThrow { Exception("User not found") }
+        .orElseThrow { NotFoundException("User not found") }
 
     fun create(user: User): User {
         if (userRepository.findByEmail(user.email).isPresent) {
-            throw Exception("Email already exists")
+            throw BadRequestException("Email already exists")
+        }
+
+        return userRepository.save(user)
+    }
+
+    fun update(user: User): User {
+        if (userRepository.findById(user.id).isEmpty) {
+            throw NotFoundException("User does not exists")
         }
 
         return userRepository.save(user)

@@ -11,7 +11,7 @@ class AuthService(
 
     fun login(loginRequest: LoginRequest): JwtTokenDTO {
         return try {
-            authRepository.login(loginRequest.username, loginRequest.password)
+            authRepository.login(loginRequest)
         } catch (exception: Exception) {
             throw AuthenticationException("Invalid credentials: wrong username or password")
         }

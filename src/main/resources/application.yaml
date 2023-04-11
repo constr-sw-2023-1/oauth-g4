@@ -2,8 +2,20 @@ spring:
   application:
     name: oauth-service
 
+  security:
+    oauth2:
+      keycloak:
+        client-id: ${KEYCLOAK_CLIENT_ID:oauth}
+        client-secret: ${KEYCLOAK_CLIENT_SECRET}
+        admin-user: ${KEYCLOAK_ADMIN_USER:admin}
+        admin-password: ${KEYCLOAK_ADMIN_PASSWORD:admin}
+        realm:
+          name: ${KEYCLOAK_REALM:construcao-sw}
+          url: ${KEYCLOAK_REALM_URL:http://localhost:8090/construcao-sw/}
+        auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8090/auth}
+
 management:
   endpoints:
     web:
-     exposure:
-       include: [health, info, env, metrics]
+      exposure:
+        include: [health, info, env, metrics]

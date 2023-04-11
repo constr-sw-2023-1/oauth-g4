@@ -28,8 +28,11 @@ services:
     ports:
       - 8080:8080
     environment:
-      - KEYCLOAK_URL=http://keycloak:8080
-      - KEYCLOAK_REALM=group4
-      - KEYCLOAK_CLIENT_SECRET=9f9b9b5e-9b9b-5e9f-9b9b-5e9f9b9b5e9b
+      - KEYCLOAK_CLIENT_ID=oauth
+      - KEYCLOAK_CLIENT_SECRET=
+      - KEYCLOAK_ADMIN_USER=admin
+      - KEYCLOAK_ADMIN_PASSWORD=a12345678
+      - KEYCLOAK_REALM=construcao-sw
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
     networks:
       - group4
