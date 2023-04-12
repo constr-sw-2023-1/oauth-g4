@@ -1,7 +1,9 @@
 package br.edu.pucrs.group4.oauthg4.adapter.repository
 
 import br.edu.pucrs.group4.oauthg4.adapter.keycloak.KeycloakUserRepository
+import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.CredentialsRepresentation
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.DisableUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
@@ -36,10 +38,10 @@ class UserRepositoryImpl(
     }
 
     override fun updatePassword(id: UUID, password: String, token: String) {
-        TODO("Not yet implemented")
+        keycloakUserRepository.updatePassword(id, CredentialsRepresentation("password",password,false), token)
     }
 
-    override fun delete(id: UUID) {
-        keycloakUserRepository.delete(id)
+    override fun disable(id: UUID, token: String) {
+        keycloakUserRepository.disable(id, DisableUserRequestDTO() ,token)
     }
 }

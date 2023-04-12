@@ -1,14 +1,13 @@
 package br.edu.pucrs.group4.oauthg4.adapter.rest
 
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
-import br.edu.pucrs.group4.oauthg4.adapter.representation.request.CreateUserRequest
-import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequest
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.CreateUserRequestDTO
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.ResetUserPasswordRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
-import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
-import br.edu.pucrs.group4.oauthg4.domain.service.AuthService
 import br.edu.pucrs.group4.oauthg4.domain.service.UserService
+import org.springframework.http.RequestEntity.HeadersBuilder
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -38,7 +37,7 @@ class UserController(
 
     @PostMapping
     fun create(
-        @RequestBody() user: CreateUserRequest,
+        @RequestBody() user: CreateUserRequestDTO,
         @RequestHeader("Authorization") token: String
     ): ResponseEntity<UserDTO> {
         val createResponse = userService.create(UserRepresentation(
@@ -64,4 +63,27 @@ class UserController(
                 token)
         return ResponseEntity.ok(updateResponse)
     }
+
+    @PatchMapping("/{id}")
+    fun resetPassword(
+        @PathVariable id: UUID,
+        @RequestBody password: ResetUserPasswordRequestDTO,
+        @RequestHeader("Authorization") token: String
+    ): ResponseEntity<Unit> {
+        userService.updatePassword(
+            id,
+            password,
+            token)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{id}")
+    fun disableUser(
+        @PathVariable id: UUID,
+        @RequestHeader("Authorization") token: String
+    ) : ResponseEntity<Unit> {
+        userService.disable(id,token)
+        return ResponseEntity.noContent().build()
+    }
+
 }

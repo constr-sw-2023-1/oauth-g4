@@ -1,6 +1,6 @@
 package br.edu.pucrs.group4.oauthg4.adapter.repository
 
-import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequest
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
 import br.edu.pucrs.group4.oauthg4.domain.repository.AuthRepository
 import org.springframework.stereotype.Repository
@@ -12,14 +12,14 @@ class AuthRepositoryImpl(
     private val webClient: WebClient
 ) : AuthRepository {
 
-    override fun login(loginRequest: LoginRequest): JwtTokenDTO {
+    override fun login(loginRequestDTO: LoginRequestDTO): JwtTokenDTO {
         return webClient.post()
             .uri("/protocol/openid-connect/token")
-            .body(BodyInserters.fromFormData("client_id", loginRequest.clientId)
-                .with("client_secret", loginRequest.clientSecret)
-                .with("username", loginRequest.username)
-                .with("password", loginRequest.password)
-                .with("grant_type", loginRequest.grantType)
+            .body(BodyInserters.fromFormData("client_id", loginRequestDTO.clientId)
+                .with("client_secret", loginRequestDTO.clientSecret)
+                .with("username", loginRequestDTO.username)
+                .with("password", loginRequestDTO.password)
+                .with("grant_type", loginRequestDTO.grantType)
             )
             .retrieve()
             .bodyToMono(JwtTokenDTO::class.java)

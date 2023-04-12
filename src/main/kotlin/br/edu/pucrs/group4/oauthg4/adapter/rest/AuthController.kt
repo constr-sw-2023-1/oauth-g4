@@ -1,6 +1,6 @@
 package br.edu.pucrs.group4.oauthg4.adapter.rest
 
-import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequest
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
 import br.edu.pucrs.group4.oauthg4.domain.service.AuthService
 import org.springframework.http.ResponseEntity
@@ -20,7 +20,7 @@ class AuthController(
         @RequestParam("password") password: String,
         @RequestParam("grant_type") grantType: String
     ): ResponseEntity<JwtTokenDTO> {
-        val loginResponse = authService.login(LoginRequest(username, password, grantType, clientId, clientSecret))
+        val loginResponse = authService.login(LoginRequestDTO(username, password, grantType, clientId, clientSecret))
         return ResponseEntity.ok(loginResponse)
     }
 }
