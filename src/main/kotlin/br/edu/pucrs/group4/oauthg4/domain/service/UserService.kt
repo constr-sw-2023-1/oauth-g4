@@ -5,10 +5,10 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.request.ResetUserPassw
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
-import br.edu.pucrs.group4.oauthg4.domain.exception.BadRequestException
+import br.edu.pucrs.group4.oauthg4.domain.exception.ExistingResourceException
 import br.edu.pucrs.group4.oauthg4.domain.exception.NotFoundException
 import br.edu.pucrs.group4.oauthg4.domain.repository.UserRepository
-import java.util.UUID
+import java.util.*
 
 
 class UserService(
@@ -25,7 +25,7 @@ class UserService(
 
     fun create(user: UserRepresentation, token: String): UserDTO {
         if (userRepository.findByEmail(user.email).isPresent) {
-            throw BadRequestException("Email already exists")
+            throw ExistingResourceException("Email already exists")
         }
 
         return userRepository.save(user, token)

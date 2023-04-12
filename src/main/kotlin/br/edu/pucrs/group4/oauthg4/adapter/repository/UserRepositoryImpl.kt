@@ -1,26 +1,49 @@
 package br.edu.pucrs.group4.oauthg4.adapter.repository
 
-import br.edu.pucrs.group4.oauthg4.adapter.keycloak.KeycloakUserRepository
+import br.edu.pucrs.group4.oauthg4.adapter.keycloak.KeycloakUserClient
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.CredentialsRepresentation
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.DisableUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
+import br.edu.pucrs.group4.oauthg4.domain.exception.AuthenticationException
+import br.edu.pucrs.group4.oauthg4.domain.exception.AuthorizationException
 import br.edu.pucrs.group4.oauthg4.domain.repository.UserRepository
+import feign.FeignException
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
 class UserRepositoryImpl(
-    private val keycloakUserRepository: KeycloakUserRepository
+    private val keycloakUserClient: KeycloakUserClient
 ) : UserRepository {
     override fun findAll(token: String): List<User> {
-        return keycloakUserRepository.findAll(token)
+        return try {
+            keycloakUserClient.findAll(token)
+        } catch (exception: FeignException) {
+            if (exception.status() == 401) {
+                throw AuthenticationException("Invalid token")
+            }
+            if (exception.status() == 403) {
+                throw AuthorizationException("Forbidden")
+            }
+            throw exception
+        }
     }
 
     override fun findById(id: UUID, token: String): Optional<User> {
-        return keycloakUserRepository.findById(id, token)
+        return try {
+            keycloakUserClient.findById(id, token)
+        } catch (exception: FeignException) {
+            if (exception.status() == 401) {
+                throw AuthenticationException("Invalid token")
+            }
+            if (exception.status() == 403) {
+                throw AuthorizationException("Forbidden")
+            }
+            throw exception
+        }
     }
 
     override fun findByEmail(email: String): Optional<User> {
@@ -28,20 +51,51 @@ class UserRepositoryImpl(
     }
 
     override fun save(user: UserRepresentation, token: String): UserDTO {
-        val saveResponse = keycloakUserRepository.save(user, token)
 
-        return UserDTO(user.id.toString(),user.username,user.firstName,user.lastName,true)
+        try {
+            keycloakUserClient.save(user, token)
+        } catch (exception: FeignException) {
+            if (exception.status() == 401) {
+                throw AuthenticationException("Invalid token")
+            }
+            if (exception.status() == 403) {
+                throw AuthorizationException("Forbidden")
+            }
+            throw exception
+        }
+        return UserDTO(user.id.toString(), user.username, user.firstName, user.lastName, true)
     }
 
-    override fun update(id:UUID, user: UpdateUserRequestDTO, token: String) {
-        keycloakUserRepository.update(id, user, token)
+    override fun update(id: UUID, user: UpdateUserRequestDTO, token: String) {
+        try {
+            keycloakUserClient.update(id, user, token)
+        } catch (exception: FeignException) {
+            if (exception.status() == 401) {
+                throw AuthenticationException("Invalid token")
+            }
+            if (exception.status() == 403) {
+                throw AuthorizationException("Forbidden")
+            }
+            throw exception
+        }
     }
 
     override fun updatePassword(id: UUID, password: String, token: String) {
-        keycloakUserRepository.updatePassword(id, CredentialsRepresentation("password",password,false), token)
+        keycloakUserClient.updatePassword(id, CredentialsRepresentation("password",password,false), token)
     }
 
     override fun disable(id: UUID, token: String) {
-        keycloakUserRepository.disable(id, DisableUserRequestDTO() ,token)
+        try {
+            keycloakUserClient.disable(id, DisableUserRequestDTO() ,token)
+
+        } catch (exception: FeignException) {
+            if (exception.status() == 401) {
+                throw AuthenticationException("Invalid token")
+            }
+            if (exception.status() == 403) {
+                throw AuthorizationException("Forbidden")
+            }
+            throw exception
+        }
     }
 }

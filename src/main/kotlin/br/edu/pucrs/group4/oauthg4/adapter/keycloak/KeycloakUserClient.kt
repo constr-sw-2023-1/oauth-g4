@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @FeignClient(name = "keycloak", url = "\${spring.security.oauth2.keycloak.realm.admin-url}")
-interface KeycloakUserRepository {
+interface KeycloakUserClient {
 
     @GetMapping("/users")
     fun findAll(@RequestHeader("Authorization") token: String): List<User>
