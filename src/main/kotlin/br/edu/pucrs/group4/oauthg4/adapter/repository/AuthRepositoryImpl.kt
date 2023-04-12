@@ -1,6 +1,7 @@
 package br.edu.pucrs.group4.oauthg4.adapter.repository
 
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequestDTO
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.RefreshTokenRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
 import br.edu.pucrs.group4.oauthg4.domain.repository.AuthRepository
 import org.springframework.stereotype.Repository
@@ -24,5 +25,18 @@ class AuthRepositoryImpl(
             .retrieve()
             .bodyToMono(JwtTokenDTO::class.java)
             .block() ?: throw RuntimeException("Error while trying to login")
+    }
+
+    override fun refresh(refreshTokenRequestDTO: RefreshTokenRequestDTO): JwtTokenDTO {
+        return webClient.post()
+            .uri("/protocol/openid-connect/token")
+            .body(BodyInserters.fromFormData("client_id", refreshTokenRequestDTO.clientId)
+                .with("client_secret", refreshTokenRequestDTO.clientSecret)
+                .with("refresh_token", refreshTokenRequestDTO.refreshToken)
+                .with("grant_type", refreshTokenRequestDTO.grantType)
+            )
+            .retrieve()
+            .bodyToMono(JwtTokenDTO::class.java)
+            .block() ?: throw RuntimeException("Error while trying to refresh token")
     }
 }
