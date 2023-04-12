@@ -24,8 +24,8 @@ class UserService(
         .orElseThrow { NotFoundException("User not found") }
 
     fun create(user: UserRepresentation, token: String): UserDTO {
-        if (userRepository.findByEmail(user.email).isPresent) {
-            throw ExistingResourceException("Email already exists")
+        if (userRepository.findByEmail(user.email, token).isNotEmpty()) {
+            throw ExistingResourceException("User with the provided email already exists")
         }
 
         return userRepository.save(user, token)
@@ -38,7 +38,7 @@ class UserService(
 
         userRepository.update(id, request, token)
 
-        return user;
+        return user
     }
 
     fun updatePassword(id: UUID, request: ResetUserPasswordRequestDTO, token: String) {

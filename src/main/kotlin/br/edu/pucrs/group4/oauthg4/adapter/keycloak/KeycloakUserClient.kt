@@ -30,4 +30,7 @@ interface KeycloakUserClient {
 
     @PutMapping("/users/{id}")
     fun disable(@PathVariable id: UUID, @RequestBody user: DisableUserRequestDTO, @RequestHeader("Authorization") token: String)
+
+    @GetMapping("/users")
+    fun findByEmail(@RequestParam email: String, @RequestHeader("Authorization") token: String): List<User>
 }
