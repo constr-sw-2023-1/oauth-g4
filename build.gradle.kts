@@ -22,8 +22,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	// security
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
