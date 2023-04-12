@@ -4,6 +4,7 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresent
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.CreateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.ResetUserPasswordRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
+import br.edu.pucrs.group4.oauthg4.adapter.rest.api.UserApi
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import br.edu.pucrs.group4.oauthg4.domain.service.UserService
@@ -17,10 +18,10 @@ import java.util.*
 @RequestMapping("/users")
 class UserController(
     private val userService: UserService
-) {
+): UserApi {
 
     @GetMapping
-    fun get(
+    override fun get(
         @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<List<User>> {
         val users = userService.findAll(token)
@@ -28,7 +29,7 @@ class UserController(
     }
 
     @GetMapping("/{id}")
-    fun get(
+    override fun get(
         @PathVariable id: UUID,
         @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<User> {
@@ -37,10 +38,9 @@ class UserController(
     }
 
     @PostMapping
-    fun create(
+    override fun create(
         @Valid @RequestBody user: CreateUserRequestDTO,
-        @RequestHeader("Authorization", required = true) token: String,
-        bindingResult: BindingResult
+        @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<UserDTO> {
         val createResponse = userService.create(
             UserRepresentation(
@@ -56,7 +56,7 @@ class UserController(
     }
 
     @PutMapping("/{id}")
-    fun update(
+    override fun update(
         @PathVariable id: UUID,
         @RequestBody user: UpdateUserRequestDTO,
         @RequestHeader("Authorization") token: String
@@ -70,7 +70,7 @@ class UserController(
     }
 
     @PatchMapping("/{id}")
-    fun resetPassword(
+    override fun resetPassword(
         @PathVariable id: UUID,
         @RequestBody password: ResetUserPasswordRequestDTO,
         @RequestHeader("Authorization") token: String
@@ -84,7 +84,7 @@ class UserController(
     }
 
     @DeleteMapping("/{id}")
-    fun disableUser(
+    override fun disable(
         @PathVariable id: UUID,
         @RequestHeader("Authorization") token: String
     ): ResponseEntity<Unit> {
