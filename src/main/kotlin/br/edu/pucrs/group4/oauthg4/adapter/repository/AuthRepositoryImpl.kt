@@ -14,7 +14,7 @@ class AuthRepositoryImpl(
 
     override fun login(loginRequest: LoginRequest): JwtTokenDTO {
         return webClient.post()
-            .uri("/realms/construcao-sw/protocol/openid-connect/token")
+            .uri("/protocol/openid-connect/token")
             .body(BodyInserters.fromFormData("client_id", loginRequest.clientId)
                 .with("client_secret", loginRequest.clientSecret)
                 .with("username", loginRequest.username)
