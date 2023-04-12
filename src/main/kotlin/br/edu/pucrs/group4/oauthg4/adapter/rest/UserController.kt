@@ -80,7 +80,7 @@ class UserController(
             password,
             token
         )
-        return ResponseEntity.noContent().build()
+        return ResponseEntity.ok().build()
     }
 
     @DeleteMapping("/{id}")
@@ -89,7 +89,7 @@ class UserController(
         @RequestHeader("Authorization") token: String
     ): ResponseEntity<Unit> {
         userService.disable(id, token)
-        return ResponseEntity.noContent().build()
+        return ResponseEntity.ok().build()
     }
 
 }
