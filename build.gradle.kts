@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "br.edu.pucrs.group4"
-version = "0.0.1-SNAPSHOT"
+version = "0.1.0-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -22,7 +22,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 	runtimeOnly("com.h2database:h2")
+	testImplementation("io.mockk:mockk:1.13.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
