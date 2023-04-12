@@ -1,6 +1,7 @@
 package br.edu.pucrs.group4.oauthg4.domain.service
 
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import br.edu.pucrs.group4.oauthg4.domain.exception.BadRequestException
@@ -13,12 +14,12 @@ class UserService(
     private val userRepository: UserRepository
 ) {
 
-    fun findAll(): List<User> {
-        return userRepository.findAll()
+    fun findAll(token: String): List<User> {
+        return userRepository.findAll(token)
     }
 
-    fun findById(id: UUID): User = userRepository
-        .findById(id)
+    fun findById(id: UUID, token: String): User = userRepository
+        .findById(id, token = token)
         .orElseThrow { NotFoundException("User not found") }
 
     fun create(user: UserRepresentation, token: String): UserDTO {
@@ -29,12 +30,14 @@ class UserService(
         return userRepository.save(user, token)
     }
 
-    fun update(user: UserRepresentation, token: String): UserDTO {
-        if (userRepository.findById(user.id).isEmpty) {
-            throw NotFoundException("User does not exists")
-        }
+    fun update(id: UUID, request: UpdateUserRequestDTO, token: String): User {
+        val user = findById(id, token)
+        user.firstName = request.firstName
+        user.lastName = request.lastName
 
-        return userRepository.save(user, token)
+        userRepository.update(id, request, token)
+
+        return user;
     }
 
 }

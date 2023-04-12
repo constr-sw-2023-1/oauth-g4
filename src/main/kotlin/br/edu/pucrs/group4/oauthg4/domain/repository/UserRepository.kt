@@ -1,24 +1,25 @@
 package br.edu.pucrs.group4.oauthg4.domain.repository
 
 import br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak.UserRepresentation
+import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import java.util.*
 
 interface UserRepository {
 
-    fun findAll(): List<User>
+    fun findAll(token: String): List<User>
 
-    fun findById(id: UUID): Optional<User>
+    fun findById(id: UUID, token: String): Optional<User>
 
     fun findByEmail(email: String): Optional<User>
 
     fun save(user: UserRepresentation, token: String): UserDTO
 
-    fun update(user: User): User
+    fun update(id: UUID, user: UpdateUserRequestDTO, token: String)
 
-    fun updatePassword(id: Long, password: String)
+    fun updatePassword(id: UUID, password: String, token: String)
 
-    fun delete(id: Long)
+    fun delete(id: UUID)
 
 }

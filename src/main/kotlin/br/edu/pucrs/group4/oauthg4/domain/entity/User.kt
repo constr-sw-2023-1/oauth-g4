@@ -10,8 +10,8 @@ import java.util.UUID
 class User(
     @Id
     val id: UUID,
-    val firstName: String,
-    val lastName: String,
+    var firstName: String,
+    var lastName: String,
     val username: String,
     val email: String,
 )
