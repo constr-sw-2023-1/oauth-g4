@@ -19,4 +19,6 @@ interface AuthApi {
         ]
     )
     fun login(clientId: String, clientSecret: String, username: String, password: String, grantType: String): ResponseEntity<JwtTokenDTO>
+
+    fun refresh(clientId: String, clientSecret: String, refreshToken: String, grantType: String): ResponseEntity<JwtTokenDTO>
 }
