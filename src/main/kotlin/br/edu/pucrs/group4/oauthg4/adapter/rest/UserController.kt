@@ -41,7 +41,6 @@ class UserController(
         @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<UserDTO> {
         val createResponse = userService.create(UserRepresentation(
-                id = UUID.randomUUID(),
                 firstName = user.firstName,
                 lastName = user.lastName,
                 username = user.username,

@@ -53,7 +53,10 @@ class UserRepositoryImpl(
     override fun save(user: UserRepresentation, token: String): UserDTO {
 
         try {
-            keycloakUserClient.save(user, token)
+            val response = keycloakUserClient.save(user, token)
+            val id = response.headers.location.toString().split("/").last()
+            return UserDTO(id, user.username, user.firstName, user.lastName, true)
+
         } catch (exception: FeignException) {
             if (exception.status() == 401) {
                 throw AuthenticationException("Invalid token")
@@ -63,7 +66,6 @@ class UserRepositoryImpl(
             }
             throw exception
         }
-        return UserDTO(user.id.toString(), user.username, user.firstName, user.lastName, true)
     }
 
     override fun update(id: UUID, user: UpdateUserRequestDTO, token: String) {
