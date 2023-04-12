@@ -1,7 +1,7 @@
 package br.edu.pucrs.group4.oauthg4.adapter.representation.request
 
 
-data class LoginRequest(
+data class LoginRequestDTO(
     val username: String,
     val password: String,
     val grantType: String,

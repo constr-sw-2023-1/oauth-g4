@@ -20,6 +20,6 @@ interface UserRepository {
 
     fun updatePassword(id: UUID, password: String, token: String)
 
-    fun delete(id: UUID)
+    fun disable(id: UUID, token: String)
 
 }
