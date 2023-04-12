@@ -12,8 +12,8 @@ class SwaggerConfig {
     fun api(): OpenAPI = OpenAPI()
         .info(
             Info()
-            .title("OAuth G4")
-            .description("OAuth G4 API documentation")
-            .version("1.0.0")
+                .title("OAuth G4")
+                .description("OAuth G4 API documentation")
+                .version("1.0.0")
         )
 }
