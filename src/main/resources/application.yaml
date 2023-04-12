@@ -7,8 +7,8 @@ spring:
       keycloak:
         realm:
           name: ${KEYCLOAK_REALM:construcao-sw}
-          url: ${KEYCLOAK_REALM_URL:http://localhost:8090/realms/construcao-sw/}
-          admin-url: ${KEYCLOAK_REALM_ADMIN_URL:http://localhost:8090/admin/realms/construcao-sw/}
+          url: ${KEYCLOAK_REALM_URL:http://localhost:8090}/realms/construcao-sw/
+          admin-url: ${KEYCLOAK_REALM_URL:http://localhost:8090}/admin/realms/construcao-sw/
 
 management:
   endpoints:
