@@ -6,6 +6,7 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.request.DisableUserReq
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequestDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import org.springframework.cloud.openfeign.FeignClient
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -19,7 +20,7 @@ interface KeycloakUserClient {
     fun findById(@PathVariable id: UUID, @RequestHeader("Authorization") token: String): Optional<User>
 
     @PostMapping("/users")
-    fun save(@RequestBody user: UserRepresentation, @RequestHeader("Authorization") token: String)
+    fun save(@RequestBody user: UserRepresentation, @RequestHeader("Authorization") token: String) : ResponseEntity<Unit>
 
     @PutMapping("/users/{id}")
     fun update(@PathVariable id: UUID, @RequestBody user: UpdateUserRequestDTO, @RequestHeader("Authorization") token: String)
