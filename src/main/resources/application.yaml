@@ -4,40 +4,13 @@ spring:
 
   security:
     oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: ${KEYCLOAK_CLIENT_ID:oauth}
-            client-secret: ${KEYCLOAK_CLIENT_SECRET}
-            authorization-grant-type: client_credentials
-            client-authentication-method: post
-        provider:
-          keycloak:
-            token-uri: ${KEYCLOAK_TOKEN_URI:http://localhost:8090/auth/realms/construcao-sw/protocol/openid-connect/token}
       keycloak:
-        admin-user: ${KEYCLOAK_ADMIN_USER:admin}
-        admin-password: ${KEYCLOAK_ADMIN_PASSWORD:admin}
         realm:
           name: ${KEYCLOAK_REALM:construcao-sw}
           url: ${KEYCLOAK_REALM_URL:http://localhost:8090/realms/construcao-sw/}
-        auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8090/auth}
 
 management:
   endpoints:
     web:
       exposure:
         include: [health, info, env, metrics]
-
-
-        spring.security.oauth2.client:
-          registration:
-            #Repeat block for any number of AuthZ servers
-            bar-auth: #unique supplier service name
-              client-id: DUMMY_CLIENT_ID_XXX
-              client-secret: DUMMY_CLIENT_SECRET_YYYY
-              authorization-grant-type: client_credentials
-              client-authentication-method: post
-          provider:
-            #Repeat block for any number of AuthZ servers
-            bar-auth:
-              token-uri: ${BAR_AUTH_SERVER_URI}/oauth/token
