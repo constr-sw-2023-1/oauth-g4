@@ -20,5 +20,13 @@ interface AuthApi {
     )
     fun login(clientId: String, clientSecret: String, username: String, password: String, grantType: String): ResponseEntity<JwtTokenDTO>
 
+    @Operation(summary = "Refresh JWT token")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "JWT token refreshed"),
+            ApiResponse(responseCode = "401", description = "Invalid token"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
     fun refresh(clientId: String, clientSecret: String, refreshToken: String, grantType: String): ResponseEntity<JwtTokenDTO>
 }
