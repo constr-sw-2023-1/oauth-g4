@@ -1,4 +1,17 @@
-security:
-  oauth:
-    client_secret: 5t92L92vBLv3EEs5hSOfNZbgeurC1U5x
-    keycloak_url: http://localhost:8090
+spring:
+  application:
+    name: oauth-service
+
+  security:
+    oauth2:
+      keycloak:
+        realm:
+          name: ${KEYCLOAK_REALM:construcao-sw}
+          url: ${KEYCLOAK_REALM_URL:http://localhost:8090}/realms/construcao-sw/
+          admin-url: ${KEYCLOAK_REALM_URL:http://localhost:8090}/admin/realms/construcao-sw/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [health, info, env, metrics]
