@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "br.edu.pucrs.group4"
-version = "1.0.0"
+version = "0.1.0-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
