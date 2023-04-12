@@ -7,8 +7,9 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.request.UpdateUserRequ
 import br.edu.pucrs.group4.oauthg4.domain.dto.UserDTO
 import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import br.edu.pucrs.group4.oauthg4.domain.service.UserService
-import org.springframework.http.RequestEntity.HeadersBuilder
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -37,16 +38,20 @@ class UserController(
 
     @PostMapping
     fun create(
-        @RequestBody() user: CreateUserRequestDTO,
-        @RequestHeader("Authorization", required = true) token: String
+        @Valid @RequestBody user: CreateUserRequestDTO,
+        @RequestHeader("Authorization", required = true) token: String,
+        bindingResult: BindingResult
     ): ResponseEntity<UserDTO> {
-        val createResponse = userService.create(UserRepresentation(
+        val createResponse = userService.create(
+            UserRepresentation(
                 firstName = user.firstName,
                 lastName = user.lastName,
                 username = user.username,
                 email = user.username,
-                credentials = listOf(mapOf("type" to "password", "value" to user.password, "temporary" to false))),
-                token)
+                credentials = listOf(mapOf("type" to "password", "value" to user.password, "temporary" to false))
+            ),
+            token
+        )
         return ResponseEntity.ok(createResponse)
     }
 
@@ -59,7 +64,8 @@ class UserController(
         val updateResponse = userService.update(
             id,
             user,
-                token)
+            token
+        )
         return ResponseEntity.ok(updateResponse)
     }
 
@@ -72,7 +78,8 @@ class UserController(
         userService.updatePassword(
             id,
             password,
-            token)
+            token
+        )
         return ResponseEntity.noContent().build()
     }
 
@@ -80,8 +87,8 @@ class UserController(
     fun disableUser(
         @PathVariable id: UUID,
         @RequestHeader("Authorization") token: String
-    ) : ResponseEntity<Unit> {
-        userService.disable(id,token)
+    ): ResponseEntity<Unit> {
+        userService.disable(id, token)
         return ResponseEntity.noContent().build()
     }
 

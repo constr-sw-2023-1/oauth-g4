@@ -12,7 +12,7 @@ interface UserRepository {
 
     fun findById(id: UUID, token: String): Optional<User>
 
-    fun findByEmail(email: String): Optional<User>
+    fun findByEmail(email: String, token: String): List<User>
 
     fun save(user: UserRepresentation, token: String): UserDTO
 
