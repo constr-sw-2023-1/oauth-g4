@@ -20,7 +20,7 @@ class UserController(
 
     @GetMapping
     fun get(
-        @RequestHeader("Authorization") token: String
+        @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<List<User>> {
         val users = userService.findAll(token)
         return ResponseEntity.ok(users)
@@ -29,7 +29,7 @@ class UserController(
     @GetMapping("/{id}")
     fun get(
         @PathVariable id: UUID,
-        @RequestHeader("Authorization") token: String
+        @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<User> {
         val user = userService.findById(id, token)
         return ResponseEntity.ok(user)
@@ -38,7 +38,7 @@ class UserController(
     @PostMapping
     fun create(
         @RequestBody() user: CreateUserRequestDTO,
-        @RequestHeader("Authorization") token: String
+        @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<UserDTO> {
         val createResponse = userService.create(UserRepresentation(
                 id = UUID.randomUUID(),

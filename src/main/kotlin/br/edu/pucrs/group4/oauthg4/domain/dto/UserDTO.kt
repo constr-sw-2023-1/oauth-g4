@@ -2,7 +2,7 @@ package br.edu.pucrs.group4.oauthg4.domain.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class UserDTO(
+data class UserDTO(
     @JsonProperty("id")
     val id: String,
     @JsonProperty("username")

@@ -1,6 +1,6 @@
 package br.edu.pucrs.group4.oauthg4.adapter.representation.keycloak
 
-import java.util.UUID
+import java.util.*
 
 class UserRepresentation(
     val id: UUID?,
