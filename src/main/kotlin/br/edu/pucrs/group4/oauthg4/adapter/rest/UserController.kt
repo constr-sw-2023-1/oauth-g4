@@ -10,15 +10,16 @@ import br.edu.pucrs.group4.oauthg4.domain.entity.User
 import br.edu.pucrs.group4.oauthg4.domain.service.UserService
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.BindingResult
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/users")
+@PreAuthorize("hasRole('admin')")
 class UserController(
     private val userService: UserService
-): UserApi {
+) : UserApi {
 
     @GetMapping
     override fun get(
