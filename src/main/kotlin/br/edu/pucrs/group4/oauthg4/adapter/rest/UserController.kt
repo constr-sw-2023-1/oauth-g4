@@ -14,9 +14,10 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+
 @RestController
 @RequestMapping("/users")
-@PreAuthorize("hasRole('admin')")
+@PreAuthorize("hasAuthority('ADMIN')")
 class UserController(
     private val userService: UserService
 ) : UserApi {
@@ -26,6 +27,7 @@ class UserController(
         @RequestHeader("Authorization", required = true) token: String
     ): ResponseEntity<List<User>> {
         val users = userService.findAll(token)
+
         return ResponseEntity.ok(users)
     }
 

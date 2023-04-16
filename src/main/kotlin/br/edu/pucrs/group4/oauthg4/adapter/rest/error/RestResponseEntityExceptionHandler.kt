@@ -4,6 +4,8 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.error.ErrorResponse
 import br.edu.pucrs.group4.oauthg4.domain.exception.*
 import feign.FeignException
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.AccessDeniedException
+import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingRequestHeaderException
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -77,5 +79,20 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
             exception.message
         )
         return ResponseEntity.status(exception.status).body(response)
+    }
+
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException::class)
+    fun handleAuthenticationException(authException: org.springframework.security.core.AuthenticationException): ResponseEntity<ErrorResponse> {
+        return buildResponseEntity(AuthenticationException())
+    }
+
+    @ExceptionHandler(InvalidBearerTokenException::class)
+    fun handleInvalidBearerTokenException(authException: InvalidBearerTokenException): ResponseEntity<ErrorResponse> {
+        return buildResponseEntity(AuthenticationException())
+    }
+
+    @ExceptionHandler(AccessDeniedException::class)
+    fun handleAccessDeniedException(authException: AccessDeniedException): ResponseEntity<ErrorResponse> {
+        return buildResponseEntity(AuthorizationException())
     }
 }
