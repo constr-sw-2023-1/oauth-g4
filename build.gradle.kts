@@ -26,6 +26,9 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	// spring security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("io.mockk:mockk:1.13.4")
