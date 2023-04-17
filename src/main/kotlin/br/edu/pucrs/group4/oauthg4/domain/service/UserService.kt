@@ -15,41 +15,41 @@ class UserService(
     private val userRepository: UserRepository
 ) {
 
-    fun findAll(token: String): List<User> {
-        return userRepository.findAll(token)
+    fun findAll(): List<User> {
+        return userRepository.findAll()
     }
 
-    fun findById(id: UUID, token: String): User = userRepository
-        .findById(id, token = token)
+    fun findById(id: UUID): User = userRepository
+        .findById(id)
         .orElseThrow { NotFoundException("User not found") }
 
-    fun create(user: UserRepresentation, token: String): UserDTO {
-        if (userRepository.findByEmail(user.email, token).isNotEmpty()) {
+    fun create(user: UserRepresentation): UserDTO {
+        if (userRepository.findByEmail(user.email).isNotEmpty()) {
             throw ExistingResourceException("User with the provided email already exists")
         }
 
-        return userRepository.save(user, token)
+        return userRepository.save(user)
     }
 
-    fun update(id: UUID, request: UpdateUserRequestDTO, token: String): User {
-        val user = findById(id, token)
+    fun update(id: UUID, request: UpdateUserRequestDTO): User {
+        val user = findById(id)
         user.firstName = request.firstName
         user.lastName = request.lastName
 
-        userRepository.update(id, request, token)
+        userRepository.update(id, request)
 
         return user
     }
 
-    fun updatePassword(id: UUID, request: ResetUserPasswordRequestDTO, token: String) {
-        findById(id, token)
-        userRepository.updatePassword(id, request.password, token)
+    fun updatePassword(id: UUID, request: ResetUserPasswordRequestDTO) {
+        findById(id)
+        userRepository.updatePassword(id, request.password)
 
     }
 
-    fun disable(id: UUID, token: String) {
-        findById(id, token)
-        userRepository.disable(id, token)
+    fun disable(id: UUID) {
+        findById(id)
+        userRepository.disable(id)
 
     }
 

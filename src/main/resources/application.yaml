@@ -4,6 +4,22 @@ spring:
 
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_REALM_URL:http://localhost:8090}/realms/construcao-sw
+      client:
+        registration:
+          keycloak:
+            client-id: ${KEYCLOAK_CLIENT_ID:oauth}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET:Hvv9m5ugemTvRzevZQNmetxiZmsS5WDT}
+            client-authentication-method: post
+            authorization-grant-type: password
+            client-name: oauth
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_REALM_URL:http://localhost:8090}/realms/construcao-sw
+            user-name-attribute: preferred_username
+            jwk-set-uri: ${KEYCLOAK_REALM_URL:http://localhost:8090}/realms/construcao-sw/protocol/openid-connect/certs
       keycloak:
         realm:
           name: ${KEYCLOAK_REALM:construcao-sw}

@@ -8,18 +8,18 @@ import java.util.*
 
 interface UserRepository {
 
-    fun findAll(token: String): List<User>
+    fun findAll(): List<User>
 
-    fun findById(id: UUID, token: String): Optional<User>
+    fun findById(id: UUID): Optional<User>
 
-    fun findByEmail(email: String, token: String): List<User>
+    fun findByEmail(email: String): List<User>
 
-    fun save(user: UserRepresentation, token: String): UserDTO
+    fun save(user: UserRepresentation): UserDTO
 
-    fun update(id: UUID, user: UpdateUserRequestDTO, token: String)
+    fun update(id: UUID, user: UpdateUserRequestDTO)
 
-    fun updatePassword(id: UUID, password: String, token: String)
+    fun updatePassword(id: UUID, password: String)
 
-    fun disable(id: UUID, token: String)
+    fun disable(id: UUID)
 
 }

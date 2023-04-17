@@ -9,7 +9,7 @@ services:
   keycloak:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:21.0.2
-    command: start-dev
+    command: start-dev --import-realm
     ports:
       - "8090:8080"
     environment:
@@ -18,6 +18,7 @@ services:
       - KEYCLOAK_FRONTEND_URL=http://localhost:8090
     volumes:
       - group4-keycloak-data:/opt/jboss/keycloak/standalone/data
+      - ./src/main/resources/keycloak_data:/opt/keycloak/data/import
     networks:
       - group4
     
@@ -29,6 +30,7 @@ services:
       - "8080:8080"
     environment:
       - KEYCLOAK_CLIENT_ID=oauth
+      - KEYCLOAK_CLIENT_SECRET=Hvv9m5ugemTvRzevZQNmetxiZmsS5WDT
       - KEYCLOAK_REALM=construcao-sw
       - KEYCLOAK_REALM_URL=http://keycloak:8080
     networks:

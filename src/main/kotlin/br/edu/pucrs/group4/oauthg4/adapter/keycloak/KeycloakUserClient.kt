@@ -14,23 +14,23 @@ import java.util.*
 interface KeycloakUserClient {
 
     @GetMapping("/users")
-    fun findAll(@RequestHeader("Authorization") token: String): List<User>
+    fun findAll(): List<User>
 
     @GetMapping("/users/{id}")
-    fun findById(@PathVariable id: UUID, @RequestHeader("Authorization") token: String): Optional<User>
+    fun findById(@PathVariable id: UUID): Optional<User>
 
     @PostMapping("/users")
-    fun save(@RequestBody user: UserRepresentation, @RequestHeader("Authorization") token: String) : ResponseEntity<Unit>
+    fun save(@RequestBody user: UserRepresentation) : ResponseEntity<Unit>
 
     @PutMapping("/users/{id}")
-    fun update(@PathVariable id: UUID, @RequestBody user: UpdateUserRequestDTO, @RequestHeader("Authorization") token: String)
+    fun update(@PathVariable id: UUID, @RequestBody user: UpdateUserRequestDTO)
 
     @PutMapping("/users/{id}/reset-password")
-    fun updatePassword(@PathVariable id: UUID, @RequestBody credentials: CredentialsRepresentation, @RequestHeader("Authorization") token: String)
+    fun updatePassword(@PathVariable id: UUID, @RequestBody credentials: CredentialsRepresentation)
 
     @PutMapping("/users/{id}")
-    fun disable(@PathVariable id: UUID, @RequestBody user: DisableUserRequestDTO, @RequestHeader("Authorization") token: String)
+    fun disable(@PathVariable id: UUID, @RequestBody user: DisableUserRequestDTO)
 
     @GetMapping("/users")
-    fun findByEmail(@RequestParam email: String, @RequestHeader("Authorization") token: String): List<User>
+    fun findByEmail(@RequestParam email: String): List<User>
 }
