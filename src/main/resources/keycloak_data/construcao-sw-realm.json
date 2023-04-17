@@ -818,29 +818,6 @@
           }
         ],
         "policies": [
-          {
-            "id": "85d0778d-d682-4c32-bcf3-df8a94585a9f",
-            "name": "Default Policy",
-            "description": "A policy that grants access only for users within this realm",
-            "type": "js",
-            "logic": "POSITIVE",
-            "decisionStrategy": "AFFIRMATIVE",
-            "config": {
-              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
-            }
-          },
-          {
-            "id": "521bd44b-9679-4fd1-89bb-ef6a1ff4e611",
-            "name": "Default Permission",
-            "description": "A permission that applies to the default resource type",
-            "type": "resource",
-            "logic": "POSITIVE",
-            "decisionStrategy": "UNANIMOUS",
-            "config": {
-              "defaultResourceType": "urn:oauth:resources:default",
-              "applyPolicies": "[\"Default Policy\"]"
-            }
-          }
         ],
         "scopes": [],
         "decisionStrategy": "UNANIMOUS"
