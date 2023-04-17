@@ -1,4 +1,4 @@
-package br.edu.pucrs.group4.oauthg4.application.config
+package br.edu.pucrs.group4.oauthg4.application.config.security
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

@@ -23,27 +23,23 @@ class UserController(
 ) : UserApi {
 
     @GetMapping
-    override fun get(
-        @RequestHeader("Authorization", required = true) token: String
-    ): ResponseEntity<List<User>> {
-        val users = userService.findAll(token)
+    override fun get(): ResponseEntity<List<User>> {
+        val users = userService.findAll()
 
         return ResponseEntity.ok(users)
     }
 
     @GetMapping("/{id}")
     override fun get(
-        @PathVariable id: UUID,
-        @RequestHeader("Authorization", required = true) token: String
+        @PathVariable id: UUID
     ): ResponseEntity<User> {
-        val user = userService.findById(id, token)
+        val user = userService.findById(id)
         return ResponseEntity.ok(user)
     }
 
     @PostMapping
     override fun create(
-        @Valid @RequestBody user: CreateUserRequestDTO,
-        @RequestHeader("Authorization", required = true) token: String
+        @Valid @RequestBody user: CreateUserRequestDTO
     ): ResponseEntity<UserDTO> {
         val createResponse = userService.create(
             UserRepresentation(
@@ -52,8 +48,7 @@ class UserController(
                 username = user.username,
                 email = user.username,
                 credentials = listOf(mapOf("type" to "password", "value" to user.password, "temporary" to false))
-            ),
-            token
+            )
         )
         return ResponseEntity.ok(createResponse)
     }
@@ -61,13 +56,11 @@ class UserController(
     @PutMapping("/{id}")
     override fun update(
         @PathVariable id: UUID,
-        @RequestBody user: UpdateUserRequestDTO,
-        @RequestHeader("Authorization") token: String
+        @RequestBody user: UpdateUserRequestDTO
     ): ResponseEntity<User> {
         val updateResponse = userService.update(
             id,
-            user,
-            token
+            user
         )
         return ResponseEntity.ok(updateResponse)
     }
@@ -75,23 +68,20 @@ class UserController(
     @PatchMapping("/{id}")
     override fun resetPassword(
         @PathVariable id: UUID,
-        @RequestBody password: ResetUserPasswordRequestDTO,
-        @RequestHeader("Authorization") token: String
+        @RequestBody password: ResetUserPasswordRequestDTO
     ): ResponseEntity<Unit> {
         userService.updatePassword(
             id,
-            password,
-            token
+            password
         )
         return ResponseEntity.ok().build()
     }
 
     @DeleteMapping("/{id}")
     override fun disable(
-        @PathVariable id: UUID,
-        @RequestHeader("Authorization") token: String
+        @PathVariable id: UUID
     ): ResponseEntity<Unit> {
-        userService.disable(id, token)
+        userService.disable(id)
         return ResponseEntity.ok().build()
     }
 

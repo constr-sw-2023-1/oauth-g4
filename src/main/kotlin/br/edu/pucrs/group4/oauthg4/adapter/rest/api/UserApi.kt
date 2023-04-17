@@ -24,7 +24,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun get(token: String): ResponseEntity<List<User>>
+    fun get(): ResponseEntity<List<User>>
 
     @Operation(summary = "Get user by id")
     @ApiResponses(
@@ -37,7 +37,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun get(id: UUID, token: String): ResponseEntity<User>
+    fun get(id: UUID): ResponseEntity<User>
 
     @Operation(summary = "Create a new user")
     @ApiResponses(
@@ -51,7 +51,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun create(user: CreateUserRequestDTO, token: String): ResponseEntity<UserDTO>
+    fun create(user: CreateUserRequestDTO): ResponseEntity<UserDTO>
 
     @Operation(summary = "Update user")
     @ApiResponses(
@@ -64,7 +64,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun update(id: UUID, user: UpdateUserRequestDTO, token: String): ResponseEntity<User>
+    fun update(id: UUID, user: UpdateUserRequestDTO): ResponseEntity<User>
 
     @Operation(summary = "Update user password")
     @ApiResponses(
@@ -77,7 +77,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun resetPassword(id: UUID, password: ResetUserPasswordRequestDTO, token: String): ResponseEntity<Unit>
+    fun resetPassword(id: UUID, password: ResetUserPasswordRequestDTO): ResponseEntity<Unit>
 
     @Operation(summary = "Disable user")
     @ApiResponses(
@@ -90,7 +90,7 @@ interface UserApi {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun disable(id: UUID, token: String): ResponseEntity<Unit>
+    fun disable(id: UUID): ResponseEntity<Unit>
 
 
 }

@@ -1,4 +1,4 @@
-package br.edu.pucrs.group4.oauthg4.application.config
+package br.edu.pucrs.group4.oauthg4.application.config.security
 
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
@@ -59,15 +59,16 @@ class SecurityConfig {
                     jwt.getClaim("realm_access")
                 val roles = realmAccess["roles"]!!
                 roles.stream()
-                    .map<SimpleGrantedAuthority> { role: String ->
+                    .map { role: String ->
                         SimpleGrantedAuthority(
                             role
                         )
                     }
-                    .collect(Collectors.toList<SimpleGrantedAuthority>())
+                    .collect(Collectors.toList())
             }
         val jwtAuthenticationConverter = JwtAuthenticationConverter()
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter)
         return jwtAuthenticationConverter
     }
+
 }

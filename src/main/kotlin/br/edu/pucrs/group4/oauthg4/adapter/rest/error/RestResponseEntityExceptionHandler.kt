@@ -59,20 +59,6 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
         return buildResponseEntity(badRequestException)
     }
 
-    @ExceptionHandler(MissingRequestHeaderException::class)
-    fun handleMissingRequestHeaderException(
-        exception: MissingRequestHeaderException
-    ): ResponseEntity<ErrorResponse>
-    {
-        if (exception.headerName == "Authorization") {
-            return buildResponseEntity(AuthenticationException("Missing token"))
-        }
-
-        val badRequestException = BadRequestException("Missing header: ${exception.headerName}")
-
-        return buildResponseEntity(badRequestException)
-    }
-
     private fun buildResponseEntity(exception: RestException): ResponseEntity<ErrorResponse> {
         val response = ErrorResponse(
             exception.code,

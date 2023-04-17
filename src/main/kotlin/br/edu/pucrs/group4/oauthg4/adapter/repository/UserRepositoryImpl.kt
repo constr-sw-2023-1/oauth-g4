@@ -15,35 +15,35 @@ import java.util.*
 class UserRepositoryImpl(
     private val keycloakUserClient: KeycloakUserClient
 ) : UserRepository {
-    override fun findAll(token: String): List<User> {
-        return keycloakUserClient.findAll(token)
+    override fun findAll(): List<User> {
+        return keycloakUserClient.findAll()
     }
 
-    override fun findById(id: UUID, token: String): Optional<User> {
-        return keycloakUserClient.findById(id, token)
+    override fun findById(id: UUID): Optional<User> {
+        return keycloakUserClient.findById(id)
     }
 
-    override fun findByEmail(email: String, token: String): List<User> {
-        return keycloakUserClient.findByEmail(email, token)
+    override fun findByEmail(email: String): List<User> {
+        return keycloakUserClient.findByEmail(email)
     }
 
-    override fun save(user: UserRepresentation, token: String): UserDTO {
-        val response = keycloakUserClient.save(user, token)
+    override fun save(user: UserRepresentation): UserDTO {
+        val response = keycloakUserClient.save(user)
         val id = response.headers.location.toString().split("/").last()
         return UserDTO(id, user.username, user.firstName, user.lastName, true)
 
     }
 
-    override fun update(id: UUID, user: UpdateUserRequestDTO, token: String) {
-        keycloakUserClient.update(id, user, token)
+    override fun update(id: UUID, user: UpdateUserRequestDTO) {
+        keycloakUserClient.update(id, user)
 
     }
 
-    override fun updatePassword(id: UUID, password: String, token: String) {
-        keycloakUserClient.updatePassword(id, CredentialsRepresentation("password", password, false), token)
+    override fun updatePassword(id: UUID, password: String) {
+        keycloakUserClient.updatePassword(id, CredentialsRepresentation("password", password, false))
     }
 
-    override fun disable(id: UUID, token: String) {
-        keycloakUserClient.disable(id, DisableUserRequestDTO(), token)
+    override fun disable(id: UUID) {
+        keycloakUserClient.disable(id, DisableUserRequestDTO())
     }
 }
