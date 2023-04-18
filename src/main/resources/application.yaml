@@ -11,7 +11,7 @@ spring:
         registration:
           keycloak:
             client-id: ${KEYCLOAK_CLIENT_ID:oauth}
-            client-secret: ${KEYCLOAK_CLIENT_SECRET:Hvv9m5ugemTvRzevZQNmetxiZmsS5WDT}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET:04bfUatIDO6ipwg1TF2mTzHrX8UZD02Z}
             client-authentication-method: post
             authorization-grant-type: password
             client-name: oauth
