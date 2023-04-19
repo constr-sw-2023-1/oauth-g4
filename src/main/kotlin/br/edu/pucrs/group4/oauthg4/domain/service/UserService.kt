@@ -33,8 +33,8 @@ class UserService(
 
     fun update(id: UUID, request: UpdateUserRequestDTO): User {
         val user = findById(id)
-        user.firstName = request.firstName
-        user.lastName = request.lastName
+        user.firstName = request.firstName ?: user.firstName
+        user.lastName = request.lastName ?: user.lastName
 
         userRepository.update(id, request)
 

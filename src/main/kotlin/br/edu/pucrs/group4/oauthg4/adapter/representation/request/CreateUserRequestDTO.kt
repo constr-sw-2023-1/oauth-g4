@@ -9,10 +9,8 @@ data class CreateUserRequestDTO(
     @field:Email(message = "Invalid email", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     val username: String,
     @field:NotBlank(message = "First name is required")
-    @JsonProperty("first-name")
     val firstName: String,
     @field:NotBlank(message = "Last name is required")
-    @JsonProperty("last-name")
     val lastName: String,
     val password: String,
 )
