@@ -23,9 +23,17 @@ services:
       - group4
     
   oauth-service:
+    depends_on:
+      - keycloak
     container_name: oauth-service
     build: .
     image: leoberlatto/oauth-service:latest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
     ports:
       - "8080:8080"
     environment:
