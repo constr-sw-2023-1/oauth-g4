@@ -1,7 +1,9 @@
-name: Deploy on Main Push
+name: Deploy
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Build on Push"]
+    types: [requested]
     branches:
       - main
     
