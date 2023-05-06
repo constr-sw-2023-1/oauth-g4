@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to OKE
 
 on:
   workflow_run:
@@ -10,7 +10,7 @@ on:
 jobs:
   install-kubectl:
     runs-on: ubuntu-latest
-    name: Install Kubectl for OKE
+    name: Deploy to OKE
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
@@ -19,13 +19,13 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
 
     steps:
-      - name: Configure Kubectl
+      - name: Connect to OKE Cluster
         uses: oracle-actions/configure-kubectl-oke@v1.3.2
         id: test-configure-kubectl-oke-action
         with:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
 
-      - name: Run Kubectl
+      - name: Deploy on Kubernetes
         run: kubectl get nodes -A
         
   
