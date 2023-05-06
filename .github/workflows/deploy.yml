@@ -2,7 +2,7 @@ name: Deploy to OKE
 
 on:
   workflow_run:
-    workflows: ["Build on Push"]
+    workflows: ["Publish Docker Image"]
     types: [completed]
     branches:
       - main
