@@ -3,7 +3,7 @@ name: Deploy
 on:
   workflow_run:
     workflows: ["Build on Push"]
-    types: [requested]
+    types: [completed]
     branches:
       - main
     
