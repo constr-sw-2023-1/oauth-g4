@@ -27,7 +27,7 @@ services:
       - keycloak
     container_name: oauth-service
     build: .
-    image: leoberlatto/oauth-service:latest
+    image: ghcr.io/constr-sw-2023-1/oauth-g4:latest
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
