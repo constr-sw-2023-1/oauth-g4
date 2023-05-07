@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: k8s-yamls
-          path: k8s
+          path: k8s/
