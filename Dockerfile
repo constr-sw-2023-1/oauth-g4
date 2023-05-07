@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN gradle build
+RUN gradle build --no-daemon
 
 FROM openjdk:17-ea-17-jdk-slim
 
