@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Deploy to OKE
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}

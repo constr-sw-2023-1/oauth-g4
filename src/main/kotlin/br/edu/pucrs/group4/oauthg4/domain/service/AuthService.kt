@@ -19,7 +19,7 @@ class AuthService(
         return try {
             authRepository.login(loginRequest)
         } catch (e: Exception) {
-            throw AuthenticationException("Error while trying to login: Invalid credentials")
+            throw AuthenticationException("Error while trying to login: " + e.message)
         }
     }
 
@@ -31,7 +31,7 @@ class AuthService(
         return try {
             authRepository.refresh(refreshTokenRequest)
         } catch (e: Exception) {
-            throw AuthenticationException("Error while trying to login: Invalid credentials")
+            throw AuthenticationException("Error while trying to login: " + e.message)
         }
     }
 
