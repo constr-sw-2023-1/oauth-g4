@@ -27,7 +27,7 @@ jobs:
 
       - name: Deploy on Kubernetes
         run: 
-          kubectl create secret docker-registry GHCR_SECRET --docker-server=https://ghcr.io --docker-username=HBO1705 --docker-password=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 --docker-email=h.oliveira@edu.pucrs.br
+          kubectl create secret docker-registry GHCR_SECRET --docker-server=https://ghcr.io --docker-username=HBO1705 --docker-password=${{ secrets.IMAGE_ACCESS_TOKEN }} --docker-email=h.oliveira@edu.pucrs.br
           kubectl apply -f oauth-g4-group4-networkpolicy.yaml
           kubectl apply -f oauth-service-deployment.yaml
           kubectl apply -f oauth-service-service.yaml
