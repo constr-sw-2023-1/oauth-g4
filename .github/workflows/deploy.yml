@@ -6,9 +6,9 @@ on:
     types: [completed]
     branches:
       - main
-    
+
 jobs:
-  install-kubectl:
+  deploy:
     runs-on: ubuntu-latest
     name: Deploy to OKE
     env:
@@ -19,22 +19,16 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Connect to OKE Cluster
         uses: oracle-actions/configure-kubectl-oke@v1.3.2
-        id: test-configure-kubectl-oke-action
+        id: configure-kubectl-oke-action
         with:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
           
-      - name: Download K8S Artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          workflow: on-push.yml
-          workflow_conclusion: success
-          name: k8s-yamls
-
       - name: Deploy on Kubernetes
-        run: kubectl apply -f k8s-yamls
-
-        
-  
+        run: |
+          kubectl apply -f .
+        working-directory: ${{ github.workspace }}/k8s
