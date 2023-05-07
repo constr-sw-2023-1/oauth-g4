@@ -27,7 +27,7 @@ spec:
             - name: KEYCLOAK_REALM
               value: construcao-sw
             - name: KEYCLOAK_REALM_URL
-              value: http://keycloak:8080
+              value: http://10.244.1.11:8080
           image: ghcr.io/constr-sw-2023-1/oauth-g4:main
           livenessProbe:
             exec:
