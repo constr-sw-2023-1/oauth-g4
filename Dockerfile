@@ -1,4 +1,4 @@
-FROM gradle:latest AS builder
+FROM arm64v8/gradle:6.9-jammy AS builder
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ COPY . .
 
 RUN gradle build
 
-FROM openjdk:17-ea-17-jdk-slim
+FROM arm64v8/openjdk:21
 
 WORKDIR /app
 
