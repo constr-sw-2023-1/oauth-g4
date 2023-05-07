@@ -26,8 +26,6 @@ jobs:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
 
       - name: Deploy on Kubernetes
-        run: kubectl apply -f oauth-g4-group4-networkpolicy.yaml
-          - kubectl apply -f oauth-service-deployment.yaml
-          - kubectl apply -f oauth-service-service.yaml
+        run: kubectl apply -f /home/ique1705
         
   
