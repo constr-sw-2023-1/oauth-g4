@@ -1,12 +1,12 @@
-FROM arm64v8/gradle:6.9-jammy AS builder
+FROM gradle:latest AS builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN gradle build
+RUN gradle build --no-daemon
 
-FROM arm64v8/openjdk:21
+FROM openjdk:17-ea-17-jdk-slim
 
 WORKDIR /app
 
