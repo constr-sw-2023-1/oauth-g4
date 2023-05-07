@@ -26,3 +26,9 @@ jobs:
         
       - name: Run tests
         run: ./gradlew test
+        
+      - name: Upload K8S artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: k8s-yamls
+          path: k8s/

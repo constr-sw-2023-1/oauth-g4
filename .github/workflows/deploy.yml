@@ -2,7 +2,7 @@ name: Deploy to OKE
 
 on:
   workflow_run:
-    workflows: ["Build on Push"]
+    workflows: ["Publish Docker Image"]
     types: [completed]
     branches:
       - main
@@ -24,8 +24,14 @@ jobs:
         id: test-configure-kubectl-oke-action
         with:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
+          
+      - name: Download K8S yamls
+        uses: actions/download-artifact@v2
+        with:
+          name: k8s-yamls
 
       - name: Deploy on Kubernetes
-        run: kubectl get nodes -A
+        run: kubectl apply -f k8s-yamls
+
         
   
