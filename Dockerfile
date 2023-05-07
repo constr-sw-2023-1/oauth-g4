@@ -6,7 +6,7 @@ COPY . .
 
 RUN gradle build
 
-FROM openjdk:17-ea-17-jdk-slim
+FROM arm64v8/openjdk:latest
 
 WORKDIR /app
 
