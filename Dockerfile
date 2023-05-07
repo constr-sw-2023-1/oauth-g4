@@ -1,4 +1,4 @@
-FROM gradle:latest AS builder
+FROM arm64v8/gradle:latest AS builder
 
 WORKDIR /app
 
