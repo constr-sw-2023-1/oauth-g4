@@ -24,12 +24,14 @@ jobs:
         id: test-configure-kubectl-oke-action
         with:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
+          
+      - name: Download K8S yamls
+        uses: actions/download-artifact@v2
+        with:
+          name: k8s-yamls
 
       - name: Deploy on Kubernetes
-        run: |
-          echo ls
-          kubectl apply -f oauth-g4-group4-networkpolicy.yaml
-          kubectl apply -f oauth-service-deployment.yaml
-          kubectl apply -f oauth-service-service.yaml
+        run: kubectl apply -f k8s-yamls
+
         
   
