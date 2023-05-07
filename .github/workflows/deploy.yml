@@ -25,10 +25,11 @@ jobs:
         with:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
           
-      - name: Download K8S yamls
-        uses: actions/download-artifact@v2
+      - name: Download K8S Artifacts
+        uses: dawidd6/action-download-artifact@v2
         with:
-          name: k8s-yamls
+          workflow: ${{ github.event.workflow_run.workflow_id }}
+          workflow_conclusion: success
 
       - name: Deploy on Kubernetes
         run: kubectl apply -f k8s-yamls
