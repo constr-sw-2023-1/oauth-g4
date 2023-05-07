@@ -28,8 +28,10 @@ jobs:
       - name: Download K8S Artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
+          name: k8s-yamls
 
       - name: Deploy on Kubernetes
         run: kubectl apply -f k8s-yamls
