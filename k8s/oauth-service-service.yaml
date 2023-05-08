@@ -7,7 +7,7 @@ metadata:
   name: oauth-service
 spec:
   ports:
-    - name: "8080"
+    - name: "8080-oauth"
       port: 8080
       targetPort: 8080
   selector:
