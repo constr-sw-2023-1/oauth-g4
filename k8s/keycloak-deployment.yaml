@@ -10,6 +10,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: keycloak
+      lbtype: external
   strategy:
     type: Recreate
   template:
@@ -18,6 +19,8 @@ spec:
       labels:
         io.kompose.network/oauth-g4-group4: "true"
         io.kompose.service: keycloak
+        lbtype: external
+        app: keycloak
     spec:
       containers:
         - args:
