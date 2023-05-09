@@ -4,13 +4,11 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: oauth-service
-  name: oauth-service
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: oauth-service
-      lbtype: external
   strategy: {}
   template:
     metadata:
@@ -18,8 +16,6 @@ spec:
       labels:
         io.kompose.network/oauth-g4-group4: "true"
         io.kompose.service: oauth-service
-        lbtype: external
-        app: oauth
     spec:
       containers:
         - env:
