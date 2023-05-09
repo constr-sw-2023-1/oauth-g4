@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: keycloak
+  name: keycloak
 spec:
   replicas: 1
   selector:
@@ -28,20 +29,11 @@ spec:
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: a12345678
             - name: KEYCLOAK_FRONTEND_URL
-              value: http://localhost:8090
+              value: http://localhost:8080
           image: quay.io/keycloak/keycloak:21.0.2
           name: keycloak
           ports:
             - containerPort: 8080
           resources: {}
-          volumeMounts:
-            - mountPath: /opt/jboss/keycloak/standalone/data
-              name: keycloak-claim
-            - mountPath: /opt/keycloak/data/import
-              name: keycloak-claim
       restartPolicy: Always
-      volumes:
-        - name: keycloak-claim
-          persistentVolumeClaim:
-            claimName: keycloak-claim
 status: {}
