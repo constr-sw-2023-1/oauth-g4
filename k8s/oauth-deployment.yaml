@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: oauth-service
-  name: oauth-service
+    io.kompose.service: oauth
+  name: oauth
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: oauth-service
+      io.kompose.service: oauth
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
         io.kompose.network/network: "true"
-        io.kompose.service: oauth-service
+        io.kompose.service: oauth
     spec:
       containers:
         - env:
@@ -39,7 +39,7 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 10
-          name: oauth-service
+          name: oauth
           ports:
             - containerPort: 8080
           resources: {}
