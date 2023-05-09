@@ -16,7 +16,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.network/oauth-g4-group4: "true"
+        io.kompose.network/network: "true"
         io.kompose.service: keycloak
     spec:
       containers:
@@ -29,7 +29,7 @@ spec:
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: a12345678
             - name: KEYCLOAK_FRONTEND_URL
-              value: http://localhost:8080
+              value: http://keycloak-service:8080
           image: quay.io/keycloak/keycloak:21.0.2
           name: keycloak
           ports:

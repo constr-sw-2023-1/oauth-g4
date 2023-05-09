@@ -3,13 +3,13 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: keycloak
-  name: keycloak
+    io.kompose.service: keycloak-service
+  name: keycloak-service
 spec:
   ports:
     - name: "8090"
-      port: 8090
-      targetPort: 8080
+      port: 8080
+      targetPort: 8090
   selector:
     io.kompose.service: keycloak
 status:

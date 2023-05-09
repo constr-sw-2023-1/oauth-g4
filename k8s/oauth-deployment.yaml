@@ -15,7 +15,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.network/oauth-g4-group4: "true"
+        io.kompose.network/network: "true"
         io.kompose.service: oauth-service
     spec:
       containers:
