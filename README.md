@@ -25,7 +25,7 @@ Use the following command to build the project:
 ## :runner: Running the Project
 Use the following command to run the project:
 ```
-java -jar build/libs/oauth-g4-0.1.0.jar
+java -jar build/libs/oauth-g4-1.0.0.jar
 ```
 
 ## :running_woman: Running the Project with Docker Compose

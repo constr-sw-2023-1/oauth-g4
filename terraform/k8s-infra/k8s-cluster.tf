@@ -195,7 +195,7 @@ resource "kubernetes_deployment" "deployment_oauth" {
             name  = "KEYCLOAK_REALM_URL"
             value = "http://${kubernetes_service.keycloak_service.spec[0].cluster_ip}:8090"
           }
-          image = "ghcr.io/constr-sw-2023-1/oauth-g4:main"
+          image = "ghcr.io/constr-sw-2023-1/oauth-g4:latest"
           name  = "oauth"
           port {
             container_port = 8080
