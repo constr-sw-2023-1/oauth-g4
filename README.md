@@ -1,4 +1,4 @@
-# oauth-g4
+# OAuth API (G4)
 
 ### :warning: Requirements
 * Java 17
