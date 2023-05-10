@@ -32,8 +32,5 @@ jobs:
       - name: Deploy on Kubernetes
         env:
           KEYCLOAK_SERVICE_IP: ${{ secrets.KEYCLOAK_SERVICE_IP }}
-        run: |
-          envsubst < keycloak-deployment.yaml | tee keycloak-deployment.yaml
-          envsubst < oauth-deployment.yaml | tee oauth-deployment.yaml
-          kubectl apply -f .
+        run: envsubst < <(cat *.yaml) | kubectl apply -f -
         working-directory: ${{ github.workspace }}/k8s
