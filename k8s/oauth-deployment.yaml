@@ -23,7 +23,7 @@ spec:
             - name: KEYCLOAK_REALM
               value: construcao-sw
             - name: KEYCLOAK_REALM_URL
-              value: http://${KEYCLOAK_SERVICE_IP}:8080
+              value: http://${KEYCLOAK_SERVICE_IP}:8090
           image: ghcr.io/constr-sw-2023-1/oauth-g4:main
           name: oauth
           ports:
