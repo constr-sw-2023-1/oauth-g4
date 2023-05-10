@@ -30,8 +30,10 @@ jobs:
           cluster: ${{ secrets.OKE_CLUSTER_OCID }}
            
       - name: Deploy on Kubernetes
+        env:
+          KEYCLOAK_SERVICE_IP: ${{ secrets.KEYCLOAK_SERVICE_IP }}
         run: |
-          export KEYCLOAK_SERVICE_IP=${{ secrets.KEYCLOAK_SERVICE_IP }} |
-          envsubst < keycloak-deployment.yaml | envsubst < oauth-deployment.yaml |
+          envsubst < keycloak-deployment.yaml | tee keycloak-deployment.yaml
+          envsubst < oauth-deployment.yaml | tee oauth-deployment.yaml
           kubectl apply -f .
         working-directory: ${{ github.workspace }}/k8s
