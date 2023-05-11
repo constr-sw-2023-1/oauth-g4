@@ -3,8 +3,6 @@ name: Build on Push
 on:
   push:
     branches: [ '**/*' ]
-    tags:        
-      - '*' 
 
 jobs:
   build:
