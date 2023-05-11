@@ -11,6 +11,8 @@ on:
     types: [completed]
     branches:
       - main
+  release:
+    types: [created]
 
 env:
   # Use docker.io for Docker Hub if empty
