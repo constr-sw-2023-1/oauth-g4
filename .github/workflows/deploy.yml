@@ -4,8 +4,6 @@ on:
   workflow_run:
     workflows: ["Publish Docker Image"]
     types: [completed]
-    branches:
-      - main
 
 jobs:
   deploy:
