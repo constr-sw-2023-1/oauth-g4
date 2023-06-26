@@ -39,6 +39,12 @@ class AuthController(
         return ResponseEntity.ok(refreshTokenResponse)
     }
 
+    @GetMapping("/token/validate")
+    override fun validateToken(): ResponseEntity<Unit> {
+        return ResponseEntity.noContent().build()
+    }
+
+
     @GetMapping("/me")
     override fun getMe(
     ): ResponseEntity<UserInformationDTO> {
