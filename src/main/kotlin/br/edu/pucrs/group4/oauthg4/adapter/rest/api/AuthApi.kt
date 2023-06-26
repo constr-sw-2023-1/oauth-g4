@@ -1,6 +1,7 @@
 package br.edu.pucrs.group4.oauthg4.adapter.rest.api
 
 import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
+import br.edu.pucrs.group4.oauthg4.domain.dto.UserInformationDTO
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -29,4 +30,14 @@ interface AuthApi {
         ]
     )
     fun refresh(clientId: String, clientSecret: String, refreshToken: String, grantType: String): ResponseEntity<JwtTokenDTO>
+
+    @Operation(summary = "Retrieve user own information")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "User data retrieved"),
+            ApiResponse(responseCode = "401", description = "Invalid token"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun getMe(): ResponseEntity<UserInformationDTO>
 }

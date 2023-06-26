@@ -4,8 +4,10 @@ import br.edu.pucrs.group4.oauthg4.adapter.representation.request.LoginRequestDT
 import br.edu.pucrs.group4.oauthg4.adapter.representation.request.RefreshTokenRequestDTO
 import br.edu.pucrs.group4.oauthg4.adapter.rest.api.AuthApi
 import br.edu.pucrs.group4.oauthg4.domain.dto.JwtTokenDTO
+import br.edu.pucrs.group4.oauthg4.domain.dto.UserInformationDTO
 import br.edu.pucrs.group4.oauthg4.domain.service.AuthService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -35,5 +37,12 @@ class AuthController(
     ): ResponseEntity<JwtTokenDTO> {
         val refreshTokenResponse = authService.refresh(RefreshTokenRequestDTO(refreshToken,grantType,clientId,clientSecret))
         return ResponseEntity.ok(refreshTokenResponse)
+    }
+
+    @GetMapping("/me")
+    override fun getMe(
+    ): ResponseEntity<UserInformationDTO> {
+        val userInformationResponse = authService.getMe()
+        return ResponseEntity.ok(userInformationResponse)
     }
 }
