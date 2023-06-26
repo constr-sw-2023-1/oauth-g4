@@ -10,6 +10,11 @@ The following URLs are hosted on OCI, the following links can redirect you to it
 - [OAuth API](http://168.75.107.143:8080/).
 - [Keycloak Admin](http://168.75.107.143:8090/).
 
+### :safety_pin: Sample Users
+
+- Username: admin@pucrs.br
+- Password: admin
+
 ### :whale2: Docker Image
 - The docker [OAuth image](https://github.com/constr-sw-2023-1/oauth-g4/pkgs/container/oauth-g4) can be pulled from the GHCR.
 
